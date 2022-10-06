@@ -72,13 +72,19 @@ def main():
     while True:
         
         screen.fill(WHITE)
-    
-        pygame.draw.rect(screen, BLACK, (200,150,100,50))
 
         for event in pygame.event.get():
+            if event.type == pygame.MOUSEMOTION:
+                mouse = pygame.mouse.get_pos()
+                print(pygame.mouse.get_pos())
+                pygame.draw.rect(screen, BLACK, pygame.Rect(mouse[0], mouse[1], 50, 50))
+                pygame.display.flip()
+    
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+                
+            pygame.display.update()
         
 main()
     
