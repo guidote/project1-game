@@ -63,15 +63,18 @@ from pygame.locals import *
 def main():
     pygame.init()
     
+    MAX_FPS = 60
+    
     width, height = 640, 480
     screen = pygame.display.set_mode((width, height))
     
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
+    GRASS_GREEN = (145, 211, 109)
     
     while True:
         
-        screen.fill(WHITE)
+        screen.fill(GRASS_GREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:
@@ -85,6 +88,8 @@ def main():
                 sys.exit()
                 
             pygame.display.update()
+            
+        fpsClock.tick(MAX_FPS)
         
 main()
     
