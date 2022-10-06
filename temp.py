@@ -89,7 +89,7 @@ def main():
                 
             pygame.display.update()
             
-        fpsClock.tick(MAX_FPS)
+        #fpsClock.tick(MAX_FPS)
         
 main()
     
