@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#! pip install pygame
+#!pip install pygame
 
 
 '''
@@ -57,14 +57,17 @@ while not done:
 pygame.quit()
 
 '''
-import pygame, sys
+import pygame, sys,random, math
 from pygame.locals import *
+from pygame.math import Vector2
+from groundObject import GroundObject
 
 def main():
     pygame.init()
     
     MAX_FPS = 60
     
+    #Pygame Window
     width, height = 640, 480
     screen = pygame.display.set_mode((width, height))
     
@@ -72,10 +75,48 @@ def main():
     WHITE = (255, 255, 255)
     GRASS_GREEN = (145, 211, 109)
     
+    #Setting up weeds, flowers and worms
+    weeds = []
+    flowers = []
+    worms = []
+    for i in range(5): weeds.append(GroundObject('weed'))
+    for i in range(3): flowers.append(GroundObject('flower'))
+    for i in range(2): worms.append(GroundObject('worm'))
+    
+    #Assigning them a random starting position
+    # TODO: make a check to not generate two items on the same spot : Big Array with the positions of eveything?
+    # TODO: below can be simplified into one line but it was giving me indentation error
+    for weed in weeds:
+        randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
+        randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
+        print(randomx)
+        print(randomy)
+        weed.position.xy = randomx, randomy
+
+    for flower in flowers:
+        randomx = random.randrange(screen.get_width() - flower.sprite.get_width())
+        randomy = random.randrange(screen.get_height() - flower.sprite.get_height())
+        flower.position.xy = randomx, randomy
+    
+    for worm in worms:
+        randomx = random.randrange(screen.get_width() - worm.sprite.get_width())
+        randomy = random.randrange(screen.get_height() - worm.sprite.get_height())
+        worm.position.xy = randomx, randomy
+
+    #Game Loop
     while True:
         
         screen.fill(GRASS_GREEN)
-
+        
+        #Display GroundObjects
+        for weed in weeds:
+            screen.blit(weed.sprite, weed.position.xy)
+        for flower in flowers:
+            screen.blit(flower.sprite, flower.position.xy)
+        for worm in worms:
+            screen.blit(worm.sprite, worm.position.xy)
+        
+        #Event Handler
         for event in pygame.event.get():
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
@@ -83,6 +124,8 @@ def main():
                 pygame.draw.rect(screen, BLACK, pygame.Rect(mouse[0], mouse[1], 50, 50))
                 pygame.display.flip()
     
+        
+            #To Quit
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
