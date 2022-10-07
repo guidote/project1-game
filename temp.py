@@ -115,15 +115,21 @@ def main():
             screen.blit(flower.sprite, flower.position.xy)
         for worm in worms:
             screen.blit(worm.sprite, worm.position.xy)
+            
+        #ONLY PLAIN DUCK , Upload Image
+        duck = pygame.image.load("data/gfx/waddle_right_0.png")
+        duck = pygame.transform.scale(duck, (width/3, height/3))
         
         #Event Handler
         for event in pygame.event.get():
+            
+            #Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
                 print(pygame.mouse.get_pos())
-                pygame.draw.rect(screen, BLACK, pygame.Rect(mouse[0], mouse[1], 50, 50))
-                pygame.display.flip()
-    
+                #pygame.draw.rect(screen, BLACK, pygame.Rect(mouse[0], mouse[1], 50, 50))
+                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_width()/2)))
+                pygame.display.update()
         
             #To Quit
             if event.type == QUIT:
