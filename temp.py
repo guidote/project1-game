@@ -68,7 +68,7 @@ def main():
     MAX_FPS = 60
     
     #Pygame Window
-    width, height = 640, 480
+    width, height = 900, 800
     screen = pygame.display.set_mode((width, height))
     
     BLACK = (0, 0, 0)
@@ -116,9 +116,9 @@ def main():
         for worm in worms:
             screen.blit(worm.sprite, worm.position.xy)
             
-        #ONLY PLAIN DUCK , Upload Image
-        duck = pygame.image.load("data/gfx/waddle_right_0.png")
-        duck = pygame.transform.scale(duck, (width/3, height/3))
+        #ONLY PLAIN DUCK , Upload Image TODO : gif when moving
+        duck = pygame.image.load("data/gfx/waddle_front_0.png")
+        duck = pygame.transform.scale(duck, (duck.get_width()/7, duck.get_height()/7))
         
         #Event Handler
         for event in pygame.event.get():
