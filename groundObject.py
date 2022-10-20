@@ -8,6 +8,7 @@ import pygame
 
 class GroundObject:
     def __init__(self, type):
+        self.type = type
         if (type == 'weed'):
            self.sprite = pygame.image.load('weedgreen.png')
         elif (type == 'flower'):

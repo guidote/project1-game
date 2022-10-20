@@ -61,6 +61,8 @@ import pygame, sys,random, math
 from pygame.locals import *
 from pygame.math import Vector2
 from groundObject import GroundObject
+from toolkit import checkPickUp
+from duck import player
 
 from duck import Duck
 
@@ -78,6 +80,7 @@ def main():
     GRASS_GREEN = (145, 211, 109)
     
     #Setting up weeds, flowers and worms
+    duck = player()
     weeds = []
     flowers = []
     worms = []
@@ -91,8 +94,6 @@ def main():
     for weed in weeds:
         randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
         randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
-        print(randomx)
-        print(randomy)
         weed.position.xy = randomx, randomy
 
     for flower in flowers:
@@ -124,9 +125,19 @@ def main():
             #Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
+               # duck.position.
                 print(pygame.mouse.get_pos())
                 Duck.display_duck(event.type, mouse, screen)
                 pygame.display.update()
+                
+            # Check for Pick up and action of GroundObjects
+            
+            for weed in weeds:
+                if (checkPickUp(duck.position.x, duck.position.y, duck.currentSprite.get_width(), duck.currentSprite.get_height(), weed.position.x, weed.position.y, weed.sprite.get_width(), weed.sprite.get_height())):
+                    #This is where we would call the function to do something (add/remove points etc)
+                    randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
+                    randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
+                    weed.position.xy = randomx, randomy
         
             #To Quit
             if event.type == QUIT:

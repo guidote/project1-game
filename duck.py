@@ -2,7 +2,9 @@ import pygame
 import time
 
 class Duck:
-    
+    position = pygame.Vector2()
+    position.xy
+
     '''
     duck_right_imgs = ["waddle_right_0.png","waddle_right_1.png"]
     duck_left_imgs = ["waddle_left_0.png","waddle_left_1.png"]
