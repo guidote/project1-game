@@ -80,7 +80,7 @@ def main():
     GRASS_GREEN = (145, 211, 109)
     
     #Setting up weeds, flowers and worms
-    duck = player()
+    duck = Duck()
     weeds = []
     flowers = []
     worms = []
