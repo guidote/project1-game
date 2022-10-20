@@ -61,9 +61,7 @@ import pygame, sys,random, math
 from pygame.locals import *
 from pygame.math import Vector2
 from groundObject import GroundObject
-from toolkit import checkPickUp
-from duck import player
-
+from toolkit import check_pick_up
 from duck import Duck
 
 def main():
@@ -72,7 +70,7 @@ def main():
     MAX_FPS = 60
     
     #Pygame Window
-    width, height = 900, 800
+    width, height = 700, 600
     screen = pygame.display.set_mode((width, height))
     
     BLACK = (0, 0, 0)
@@ -91,6 +89,15 @@ def main():
     #Assigning them a random starting position
     # TODO: make a check to not generate two items on the same spot : Big Array with the positions of eveything?
     # TODO: below can be simplified into one line but it was giving me indentation error
+    ground_objects = [weeds,flowers,worms]
+    
+    # for go in ground_objects:
+    #     for element in go[element]:
+    #         # add array index
+    #     randomx = random.randrange(screen.get_width() - go.sprite.get_width())
+    #     randomy = random.randrange(screen.get_height() - go.sprite.get_height())
+    #     go.position.xy = randomx, randomy
+    
     for weed in weeds:
         randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
         randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
@@ -125,19 +132,21 @@ def main():
             #Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
-               # duck.position.
+                duck.position.x, duck.position.y = mouse 
                 print(pygame.mouse.get_pos())
                 Duck.display_duck(event.type, mouse, screen)
                 pygame.display.update()
                 
             # Check for Pick up and action of GroundObjects
             
+            
             for weed in weeds:
-                if (checkPickUp(duck.position.x, duck.position.y, duck.currentSprite.get_width(), duck.currentSprite.get_height(), weed.position.x, weed.position.y, weed.sprite.get_width(), weed.sprite.get_height())):
+                if (check_pick_up(duck.position.x, duck.position.y, Duck.width, Duck.height, weed.position.x, weed.position.y, weed.sprite.get_width(), weed.sprite.get_height())):
                     #This is where we would call the function to do something (add/remove points etc)
                     randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
                     randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
                     weed.position.xy = randomx, randomy
+                    
         
             #To Quit
             if event.type == QUIT:
