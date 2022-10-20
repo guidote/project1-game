@@ -62,6 +62,8 @@ from pygame.locals import *
 from pygame.math import Vector2
 from groundObject import GroundObject
 
+from duck import Duck
+
 def main():
     pygame.init()
     
@@ -115,10 +117,6 @@ def main():
             screen.blit(flower.sprite, flower.position.xy)
         for worm in worms:
             screen.blit(worm.sprite, worm.position.xy)
-            
-        #ONLY PLAIN DUCK , Upload Image TODO : gif when moving
-        duck = pygame.image.load("data/gfx/waddle_front_0.png")
-        duck = pygame.transform.scale(duck, (duck.get_width()/7, duck.get_height()/7))
         
         #Event Handler
         for event in pygame.event.get():
@@ -127,8 +125,7 @@ def main():
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
                 print(pygame.mouse.get_pos())
-                #pygame.draw.rect(screen, BLACK, pygame.Rect(mouse[0], mouse[1], 50, 50))
-                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_width()/2)))
+                Duck.display_duck(event.type, mouse, screen)
                 pygame.display.update()
         
             #To Quit
