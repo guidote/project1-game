@@ -22,7 +22,7 @@ class Duck:
             for i in indices:
                 img = pygame.image.load("data/gfx/waddle_right_{}.png".format(i))
                 duck = pygame.transform.scale(img, (Duck.width, Duck.height))
-                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_width()/2)))
+                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
                 pygame.display.update()
                 pygame.time.delay(100)
             

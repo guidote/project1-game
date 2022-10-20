@@ -129,17 +129,20 @@ def main():
         #Event Handler
         for event in pygame.event.get():
             
-            #Mouse Moving Event = Move Duck
+            # Duck Previous Position
+            mouse = pygame.mouse.get_pos()
+            previous_position_x, previous_position_y = mouse
+            
+            # Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
                 duck.position.x, duck.position.y = mouse 
-                print(pygame.mouse.get_pos())
+                
                 Duck.display_duck(event.type, mouse, screen)
                 pygame.display.update()
                 
             # Check for Pick up and action of GroundObjects
-            
-            
+        
             for weed in weeds:
                 if (check_pick_up(duck.position.x, duck.position.y, Duck.width, Duck.height, weed.position.x, weed.position.y, weed.sprite.get_width(), weed.sprite.get_height())):
                     #This is where we would call the function to do something (add/remove points etc)
