@@ -79,39 +79,18 @@ def main():
     
     #Setting up weeds, flowers and worms
     duck = Duck()
-    weeds = []
-    flowers = []
-    worms = []
-    for i in range(5): weeds.append(GroundObject('weed'))
-    for i in range(3): flowers.append(GroundObject('flower'))
-    for i in range(2): worms.append(GroundObject('worm'))
+    ground_objects = []
+    for i in range(5): ground_objects.append(GroundObject('weed'))
+    for i in range(3): ground_objects.append(GroundObject('flower'))
+    for i in range(2): ground_objects.append(GroundObject('worm'))
     
     #Assigning them a random starting position
-    # TODO: make a check to not generate two items on the same spot : Big Array with the positions of eveything?
+    # TODO: make a check to not generate two items on the same spot
     # TODO: below can be simplified into one line but it was giving me indentation error
-    ground_objects = [weeds,flowers,worms]
-    
-    # for go in ground_objects:
-    #     for element in go[element]:
-    #         # add array index
-    #     randomx = random.randrange(screen.get_width() - go.sprite.get_width())
-    #     randomy = random.randrange(screen.get_height() - go.sprite.get_height())
-    #     go.position.xy = randomx, randomy
-    
-    for weed in weeds:
-        randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
-        randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
-        weed.position.xy = randomx, randomy
-
-    for flower in flowers:
-        randomx = random.randrange(screen.get_width() - flower.sprite.get_width())
-        randomy = random.randrange(screen.get_height() - flower.sprite.get_height())
-        flower.position.xy = randomx, randomy
-    
-    for worm in worms:
-        randomx = random.randrange(screen.get_width() - worm.sprite.get_width())
-        randomy = random.randrange(screen.get_height() - worm.sprite.get_height())
-        worm.position.xy = randomx, randomy
+    for i in ground_objects:
+            randomx = random.randrange(screen.get_width() - i.sprite.get_width())
+            randomy = random.randrange(screen.get_height() - i.sprite.get_height())
+            i.position.xy = randomx, randomy
 
     #Game Loop
     while True:
@@ -119,12 +98,8 @@ def main():
         screen.fill(GRASS_GREEN)
         
         #Display GroundObjects
-        for weed in weeds:
-            screen.blit(weed.sprite, weed.position.xy)
-        for flower in flowers:
-            screen.blit(flower.sprite, flower.position.xy)
-        for worm in worms:
-            screen.blit(worm.sprite, worm.position.xy)
+        for i in ground_objects:
+            screen.blit(i.sprite, i.position.xy)
         
         #Event Handler
         for event in pygame.event.get():
@@ -136,20 +111,17 @@ def main():
             # Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
-                duck.position.x, duck.position.y = mouse 
+                Duck.position.x, Duck.position.y = mouse 
                 
                 Duck.display_duck(event.type, mouse, screen)
                 pygame.display.update()
-                
-            # Check for Pick up and action of GroundObjects
-        
-            for weed in weeds:
-                if (check_pick_up(duck.position.x, duck.position.y, Duck.width, Duck.height, weed.position.x, weed.position.y, weed.sprite.get_width(), weed.sprite.get_height())):
-                    #This is where we would call the function to do something (add/remove points etc)
-                    randomx = random.randrange(screen.get_width() - weed.sprite.get_width())
-                    randomy = random.randrange(screen.get_height() - weed.sprite.get_height())
-                    weed.position.xy = randomx, randomy
-                    
+
+            #Check for Pick up and action of GroundObjects
+            for i in ground_objects:
+                if (check_pick_up(Duck, i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
+                    randomx = random.randrange(screen.get_width() - i.sprite.get_width())
+                    randomy = random.randrange(screen.get_height() - i.sprite.get_height())
+                    i.position.xy = randomx, randomy
         
             #To Quit
             if event.type == QUIT:

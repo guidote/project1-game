@@ -3,11 +3,14 @@
 Created on Thu Oct 20 12:16:14 2022
 """
 
-def check_pick_up(a_x, a_y, a_width, a_height, b_x, b_y, b_width, b_height):
-    return (a_x + a_width > b_x) and (a_x < b_x + b_width) and (a_y + a_height > b_y) and (a_y < b_y + b_height)
+def check_pick_up(Duck, b_x, b_y, b_width, b_height):
+    top = Duck.position.y + Duck.height/4
+    bottom = Duck.position.y - Duck.height/4
+    left = Duck.position.x - Duck.width/4
+    right = Duck.position.x + Duck.width/4
+    
+    if (b_x >= left and b_x <= right):
+        if (b_y <= top and b_y >= bottom):
+            return True
+    return False
 
-    
-    
-    
-    
-    
