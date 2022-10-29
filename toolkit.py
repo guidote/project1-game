@@ -18,7 +18,7 @@ def check_duck_position(previous_position_x, previous_position_y, position_x, po
         return "left"
     elif (position_y > previous_position_y and (position_y - previous_position_y)>10):
         return "front"
-    elif (position_y < previous_position_yand (previous_position_y - position_y)>10):
+    elif (position_y < previous_position_y and (previous_position_y - position_y)>10):
         return "back"   
     else:
         return "front"
