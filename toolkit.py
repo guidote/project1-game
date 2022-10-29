@@ -12,13 +12,13 @@ def check_pick_up(Duck, b_x, b_y, b_width, b_height):
 
 
 def check_duck_position(previous_position_x, previous_position_y, position_x, position_y):
-    if (position_x > previous_position_x and (position_x - previous_position_x)>5):
+    if (position_x > previous_position_x and (position_x - previous_position_x)>10):
         return "right"
-    elif (position_x < previous_position_x  and (previous_position_x - position_x)>5):
+    elif (position_x < previous_position_x  and (previous_position_x - position_x)>10):
         return "left"
-    elif (position_y > previous_position_y and (position_y - previous_position_y)>5):
+    elif (position_y > previous_position_y and (position_y - previous_position_y)>10):
         return "front"
-    elif (position_y < previous_position_yand (previous_position_y - position_y)>5):
+    elif (position_y < previous_position_yand (previous_position_y - position_y)>10):
         return "back"   
     else:
         return "front"
