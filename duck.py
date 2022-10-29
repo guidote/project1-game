@@ -1,5 +1,6 @@
 import pygame
 import time
+from enum import Enum
 
 class Duck:
     position = pygame.Vector2()
@@ -15,17 +16,11 @@ class Duck:
     duck_back_imgs = ["waddle_back_0.png","waddle_back_1.png"]
     '''
         
-    def display_duck(movement_state, mouse, screen):
+    def display_duck(mouse, screen, movement):
         indices = [0,1]
-        
-        if movement_state == pygame.MOUSEMOTION:
-            for i in indices:
-                img = pygame.image.load("data/gfx/waddle_right_{}.png".format(i))
-                duck = pygame.transform.scale(img, (Duck.width, Duck.height))
-                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
-                pygame.display.update()
-                pygame.time.delay(100)
-            
-        
-        
-        
+        for i in indices:
+            img = pygame.image.load("data/gfx/waddle_{0}_{1}.png".format(movement, i))
+            duck = pygame.transform.scale(img, (Duck.width, Duck.height))
+            screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
+            pygame.display.update()
+            pygame.time.delay(100)

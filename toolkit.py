@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Oct 20 12:16:14 2022
-"""
 
 def check_pick_up(Duck, b_x, b_y, b_width, b_height):
     top = Duck.position.y + Duck.height/4
@@ -13,4 +9,17 @@ def check_pick_up(Duck, b_x, b_y, b_width, b_height):
         if (b_y <= top and b_y >= bottom):
             return True
     return False
+
+
+def check_duck_position(previous_position_x, previous_position_y, position_x, position_y):
+    if (position_x > previous_position_x and (position_x - previous_position_x)>5):
+        return "right"
+    elif (position_x < previous_position_x  and (previous_position_x - position_x)>5):
+        return "left"
+    elif (position_y > previous_position_y and (position_y - previous_position_y)>5):
+        return "front"
+    elif (position_y < previous_position_yand (previous_position_y - position_y)>5):
+        return "back"   
+    else:
+        return "front"
 
