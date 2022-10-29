@@ -56,7 +56,6 @@ def main():
                 Duck.position.x, Duck.position.y = mouse 
 
                 movement = check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
-                print("(1)", previous_position_x , " --- " , mouse[0])
                 Duck.display_duck(mouse, screen, movement)
                 pygame.display.update()
                 
