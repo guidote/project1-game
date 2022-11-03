@@ -35,6 +35,7 @@ def main():
             
     while game_state == "main_menu":
         game_state = "playing"
+
         
     #Game Loop
     while game_state == "playing":
