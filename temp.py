@@ -8,7 +8,7 @@ from duck import Duck
 def main():
     pygame.init()
     
-    MAX_FPS = 60
+    game_state = "main_menu"
     
     #Pygame Window
     width, height = 700, 600
@@ -32,9 +32,12 @@ def main():
             randomx = random.randrange(screen.get_width() - i.sprite.get_width())
             randomy = random.randrange(screen.get_height() - i.sprite.get_height())
             i.position.xy = randomx, randomy
-
+            
+    while game_state == "main_menu":
+        game_state = "playing"
+        
     #Game Loop
-    while True:
+    while game_state == "playing":
         
         screen.fill(GRASS_GREEN)
         
@@ -73,8 +76,6 @@ def main():
                 sys.exit()
                 
             pygame.display.update()
-            
-        #fpsClock.tick(MAX_FPS)
         
 main()
     
