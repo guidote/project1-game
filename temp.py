@@ -1,21 +1,19 @@
-import pygame, sys,random, math
+import pygame, sys,random
 from pygame.locals import *
-from pygame.math import Vector2
 from groundObject import GroundObject
 from toolkit import check_pick_up, check_duck_position
 from duck import Duck
+from startup import Title_Screen
 
 def main():
     pygame.init()
     
-    game_state = "main_menu"
+    game_state = "title_screen"
     
     #Pygame Window
     width, height = 700, 600
     screen = pygame.display.set_mode((width, height))
     
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
     GRASS_GREEN = (145, 211, 109)
     
     # Getting Images for the shop
@@ -44,7 +42,7 @@ def main():
             randomy = random.randrange(screen.get_height() - i.sprite.get_height())
             i.position.xy = randomx, randomy
             
-    while game_state == "main_menu":
+    while game_state == "title_screen":
         game_state = "playing"
 
         
