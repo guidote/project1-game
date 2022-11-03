@@ -18,16 +18,27 @@ def main():
     WHITE = (255, 255, 255)
     GRASS_GREEN = (145, 211, 109)
     
+    # Getting Images for the shop
+    # shop = pygame.image.load('data/gfx/shop.png')
+    # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
+    # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
+    # worms_button = pygame.image.load('data/gfx/worms_button.png')
+    
+    # buttons = []
+    # buttons.append(Button(weeds_button))
+    # buttons.append(Button(flowers_button))
+    # buttons.append(Button(worms_button))
+
     #Setting up weeds, flowers and worms
     duck = Duck()
     ground_objects = []
     for i in range(5): ground_objects.append(GroundObject('weed'))
     for i in range(3): ground_objects.append(GroundObject('flower'))
     for i in range(2): ground_objects.append(GroundObject('worm'))
+
     
     #Assigning them a random starting position
-    # TODO: make a check to not generate two items on the same spot
-    # TODO: below can be simplified into one line but it was giving me indentation error
+    # TODO: make a check to not generate two items on the same spot OR IN THE SHOP
     for i in ground_objects:
             randomx = random.randrange(screen.get_width() - i.sprite.get_width())
             randomy = random.randrange(screen.get_height() - i.sprite.get_height())
@@ -41,10 +52,26 @@ def main():
     while game_state == "playing":
         
         screen.fill(GRASS_GREEN)
+        # Display Shop and score section
+        # DISPLAY.blit(shop, (0, 0))
+
+        # for button in buttons:
+        #     DISPLAY.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
+        #     priceDisplay = font_small.render(str(button.price), True, (0,0,0))
+            
+        #     # For later development : LEVELS
+        #     #levelDisplay = font_20.render('Lvl. ' + str(button.level), True, (200,200,200))
+        #     #DISPLAY.blit(levelDisplay, (234 + (buttons.index(button)*125), 441))
+            
+        #     counter = font_small.render(str(button.count).zfill(7), True, (0,0,0))
+        #    #Below is 2 coordinates that have to depend on the button's position
+        #     #DISPLAY.blit(counter, (72, 394))
+
         
         #Display GroundObjects
         for i in ground_objects:
             screen.blit(i.sprite, i.position.xy)
+            
             
         # Duck Previous Position
         mouse = pygame.mouse.get_pos()
@@ -67,6 +94,9 @@ def main():
             #Check for Pick up and action of GroundObjects
             for i in ground_objects:
                 if (check_pick_up(Duck, i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
+                    # Counters
+                    #groud_objects[i].count +=1
+                    # Generating a new position
                     randomx = random.randrange(screen.get_width() - i.sprite.get_width())
                     randomy = random.randrange(screen.get_height() - i.sprite.get_height())
                     i.position.xy = randomx, randomy
