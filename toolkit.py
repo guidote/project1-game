@@ -22,4 +22,10 @@ def check_duck_position(previous_position_x, previous_position_y, position_x, po
         return "back"   
     else:
         return "front" # TODO : idle
+    
+def mouse_over_rect(rect, mouse):
+    if rect.collidepoint(mouse):
+        return True
+    else:
+        return False
 

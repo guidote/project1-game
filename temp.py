@@ -18,6 +18,9 @@ def main():
     
     GRASS_GREEN = (145, 211, 109)
     
+    #Create a duck
+    duck = Duck()
+    
     # Getting Images for the shop
     # shop = pygame.image.load('data/gfx/shop.png')
     # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
@@ -30,7 +33,6 @@ def main():
     # buttons.append(Button(worms_button))
 
     #Setting up weeds, flowers and worms
-    duck = Duck()
     ground_objects = []
     for i in range(5): ground_objects.append(GroundObject('weed'))
     for i in range(3): ground_objects.append(GroundObject('flower'))
@@ -45,14 +47,13 @@ def main():
             i.position.xy = randomx, randomy
        
     # TITLE SCREEN
+    title_screen = Title_Screen()
     while game_state == "title_screen":
+        
         screen.fill(GRASS_GREEN)
-        
-        #TODO: fix title screen
-        
         mouse = pygame.mouse.get_pos()
         
-        Title_Screen.display_duck_title(screen,mouse)
+        title_screen.display_duck_title(screen,mouse)
         
         for event in pygame.event.get():
             # Mouse click start playing
@@ -100,16 +101,16 @@ def main():
             # Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
-                Duck.position.x, Duck.position.y = mouse 
+                duck.position.x, duck.position.y = mouse 
 
                 movement = check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
-                Duck.display_duck(mouse, screen, movement)
+                duck.display_duck(mouse, screen, movement)
                 pygame.display.update()
                 
 
             #Check for Pick up and action of GroundObjects
             for i in ground_objects:
-                if (check_pick_up(Duck, i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
+                if (check_pick_up(duck, i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
                     # Counters
                     #groud_objects[i].count +=1
                     # Generating a new position

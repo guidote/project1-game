@@ -15,12 +15,16 @@ class Duck:
     duck_front_imgs = ["waddle_front_0.png","waddle_front_1.png"]
     duck_back_imgs = ["waddle_back_0.png","waddle_back_1.png"]
     '''
-        
-    def display_duck(mouse, screen, movement):
+    def __init__(self):
+        pass
+     
+    def display_duck(self, mouse, screen, movement):
         indices = [0,1]
         for i in indices:
             img = pygame.image.load("data/gfx/waddle_{0}_{1}.png".format(movement, i))
-            duck = pygame.transform.scale(img, (Duck.width, Duck.height))
+            duck = pygame.transform.scale(img, (self.width, self.height))
             screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
             pygame.display.update()
             pygame.time.delay(100)
+            
+    

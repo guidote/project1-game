@@ -2,7 +2,7 @@ import pygame
 
 class Title_Screen:
     
-    center_position = (200, 200)
+    center_position = (350, 300)
     lower_center_position = (350, 200)
     
     ## TODO: if mouse over use one image else use other
@@ -18,20 +18,22 @@ class Title_Screen:
     text_rect = duck_title.get_rect()
     text_rect.center = center_position
     
+    def __init__(self):
+        pass
     
-    def mouse_over(mouse):
-        if Title_Screen.text_rect.collidepoint(mouse):
-            Title_Screen.hover = True
+    def mouse_over(self, mouse):
+        if self.text_rect.collidepoint(mouse):
+            self.hover = True
         else:
-            Title_Screen.hover = False
+            self.hover = False
     
-    def display_duck_title(screen, mouse):
-        Title_Screen.mouse_over(mouse)
+    def display_duck_title(self, screen, mouse):
+        self.mouse_over(mouse)
     
-        if Title_Screen.hover:
-            screen.blit(Title_Screen.hovered_duck_title, Title_Screen.text_rect)
+        if self.hover:
+            screen.blit(self.hovered_duck_title, self.text_rect)
             pygame.display.update()
         else:
-            screen.blit(Title_Screen.duck_title, Title_Screen.text_rect)
+            screen.blit(self.duck_title, self.text_rect)
             pygame.display.update()
         
