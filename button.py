@@ -12,4 +12,4 @@ class Button:
         self.count = 0
         # FOR LATER DEVELOPMENT : LEVELS
         #self.level = 1   
-        sprite = button_image
+        self.sprite = button_image
