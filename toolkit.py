@@ -21,5 +21,5 @@ def check_duck_position(previous_position_x, previous_position_y, position_x, po
     elif (position_y < previous_position_y and (previous_position_y - position_y)>10):
         return "back"   
     else:
-        return "front"
+        return "front" # TODO : idle
 

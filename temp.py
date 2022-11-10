@@ -6,6 +6,8 @@ from duck import Duck
 from startup import Title_Screen
 
 def main():
+    
+    # SET UP
     pygame.init()
     
     game_state = "title_screen"
@@ -41,12 +43,28 @@ def main():
             randomx = random.randrange(screen.get_width() - i.sprite.get_width())
             randomy = random.randrange(screen.get_height() - i.sprite.get_height())
             i.position.xy = randomx, randomy
-            
+       
+    # TITLE SCREEN
     while game_state == "title_screen":
-        game_state = "playing"
+        screen.fill(GRASS_GREEN)
+        
+        #TODO: fix title screen
+        
+        mouse = pygame.mouse.get_pos()
+        
+        Title_Screen.display_duck_title(screen,mouse)
+        
+        for event in pygame.event.get():
+            # Mouse click start playing
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                game_state = "playing"
+                
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
 
         
-    #Game Loop
+    # GAME LOOP
     while game_state == "playing":
         
         screen.fill(GRASS_GREEN)
