@@ -1,7 +1,7 @@
 import pygame, sys,random
 from pygame.locals import *
 from groundObject import GroundObject
-from toolkit import check_pick_up, check_duck_position
+import toolkit
 from duck import Duck
 from startup import Title_Screen
 
@@ -103,14 +103,14 @@ def main():
                 mouse = pygame.mouse.get_pos()
                 duck.position.x, duck.position.y = mouse 
 
-                movement = check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
+                movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
                 duck.display_duck(mouse, screen, movement)
                 pygame.display.update()
                 
 
             #Check for Pick up and action of GroundObjects
             for i in ground_objects:
-                if (check_pick_up(duck, i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
+                if (duck.check_pick_up(i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
                     # Counters
                     #groud_objects[i].count +=1
                     # Generating a new position
