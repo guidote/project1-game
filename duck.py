@@ -14,6 +14,8 @@ class Duck:
     duck_left_imgs = ["waddle_left_0.png","waddle_left_1.png"]
     duck_front_imgs = ["waddle_front_0.png","waddle_front_1.png"]
     duck_back_imgs = ["waddle_back_0.png","waddle_back_1.png"]
+    duck_idle_imgs = ["waddle_idle_0.png","waddle_idle_1.png"]
+    
     '''
     def __init__(self):
         pass
@@ -48,4 +50,4 @@ class Duck:
         elif (position_y < previous_position_y and (previous_position_y - position_y)>10):
             return "back"   
         else:
-            return "front" # TODO : idle
+            return "idle" # TODO : idle
