@@ -1,39 +1,35 @@
 import pygame
 
-class Title_Screen:
-    
-    center_position = (350, 300)
-    lower_center_position = (350, 200)
-    
-    ## TODO: if mouse over use one image else use other
-    img = pygame.image.load("data/gfx/main_menu/duck_title.png")
-    duck_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
-    hovered_duck_title = pygame.transform.scale(duck_title, (duck_title.get_width()*1.2, duck_title.get_height()*1.2))
-    
-    img = pygame.image.load("data/gfx/main_menu/start_title.png")
-    start_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
-    hovered_start_title = pygame.transform.scale(start_title, (start_title.get_width()*1.2, start_title.get_height()*1.2))
+def mouse_over_rect(rect, mouse):
+    if rect.collidepoint(mouse):
+        return True
+    else:
+        return False
+            
+class Button:
     
     collide = False
-    text_rect = duck_title.get_rect()
-    text_rect.center = center_position
+
+    def __init__(self, image, pos, collide = False):
+        self.image = image
+        self.collide = collide
+        self.x_pos = pos[0]
+        self.y_pos = pos[1]
+        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
     
-    def __init__(self):
-        pass
-    
-    def mouse_over(self, mouse):
-        if self.text_rect.collidepoint(mouse):
-            self.collide = True
-        else:
-            self.collide = False
-    
-    def display_duck_title(self, screen, mouse):
-        self.mouse_over(mouse)
-    
+    def hover_button_image(self):
+        self.hovered_img = pygame.transform.scale(self.image, (self.image.get_width()*1.2, self.image.get_height()*1.2))
+        self.hovered_rect = self.rect = self.hovered_img.get_rect(center=(self.x_pos, self.y_pos))
+        return [self.hovered_img, self.hovered_rect]
+        
+    def display_button_image(self, screen, mouse):
+        self.collide = mouse_over_rect(self.rect, mouse)
+        
         if self.collide:
-            screen.blit(self.hovered_duck_title, self.text_rect)
+            screen.blit(self.hover_button_image()[0], self.hover_button_image()[1])
             pygame.display.update()
         else:
-            screen.blit(self.duck_title, self.text_rect)
+            screen.blit(self.image, self.rect)
             pygame.display.update()
+    
         

@@ -3,7 +3,7 @@ from pygame.locals import *
 from groundObject import GroundObject
 import toolkit
 from duck import Duck
-from startup import Title_Screen
+from startup import Button
 
 # Pygame Window
 WIDTH, HEIGHT = 700, 600
@@ -13,19 +13,25 @@ GRASS_GREEN = (145, 211, 109)
 def main_menu():
     pygame.display.set_caption("Duck Menu")
     
+    img = pygame.image.load("data/gfx/main_menu/duck_title.png")
+    duck_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
+    
+    img = pygame.image.load("data/gfx/main_menu/start_title.png")
+    start_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
+    
     #Create title screen
-    title_screen = Title_Screen()
+    duck_button = Button(duck_title, (350, 300))
     
     while True:
         SCREEN.fill(GRASS_GREEN)
         mouse = pygame.mouse.get_pos()
         
-        title_screen.display_duck_title(SCREEN, mouse)
+        duck_button.display_button_image(SCREEN, mouse)
         
         for event in pygame.event.get():
             # Mouse click start playing
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if title_screen.collide:
+                if duck_button.collide:
                     play()
                 
             if event.type == QUIT:
@@ -122,7 +128,7 @@ def play():
                 
             pygame.display.update()
     
-
+'''
 def main():
     
     # SET UP
@@ -243,6 +249,7 @@ def main():
                 sys.exit()
                 
             pygame.display.update()
+'''
         
 main_menu()
     
