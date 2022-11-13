@@ -58,7 +58,8 @@ def main():
         for event in pygame.event.get():
             # Mouse click start playing
             if event.type == pygame.MOUSEBUTTONDOWN:
-                game_state = "playing"
+                if title_screen.hover:
+                    game_state = "playing"
                 
             if event.type == QUIT:
                 pygame.quit()
