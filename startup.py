@@ -6,7 +6,7 @@ def mouse_over_rect(rect, mouse):
     else:
         return False
             
-class Button:
+class Menu_Button:
     
     collide = False
 
@@ -19,7 +19,7 @@ class Button:
     
     def hover_button_image(self):
         self.hovered_img = pygame.transform.scale(self.image, (self.image.get_width()*1.2, self.image.get_height()*1.2))
-        self.hovered_rect = self.rect = self.hovered_img.get_rect(center=(self.x_pos, self.y_pos))
+        self.hovered_rect = self.hovered_img.get_rect(center=(self.x_pos, self.y_pos))
         return [self.hovered_img, self.hovered_rect]
         
     def display_button_image(self, screen, mouse):

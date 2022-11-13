@@ -1,9 +1,8 @@
 import pygame, sys,random
 from pygame.locals import *
 from groundObject import GroundObject
-import toolkit
 from duck import Duck
-from startup import Button
+from startup import Menu_Button
 
 # Pygame Window
 WIDTH, HEIGHT = 700, 600
@@ -17,21 +16,23 @@ def main_menu():
     duck_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
     
     img = pygame.image.load("data/gfx/main_menu/start_title.png")
-    start_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
+    start_title = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
     
-    #Create title screen
-    duck_button = Button(duck_title, (350, 300))
+    # Create title screen 
+    duck_button = Menu_Button(duck_title, (350, 300))
+    start_button = Menu_Button(start_title, (350, 450))
     
     while True:
         SCREEN.fill(GRASS_GREEN)
         mouse = pygame.mouse.get_pos()
         
         duck_button.display_button_image(SCREEN, mouse)
+        start_button.display_button_image(SCREEN, mouse)
         
         for event in pygame.event.get():
             # Mouse click start playing
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if duck_button.collide:
+                if start_button.collide:
                     play()
                 
             if event.type == QUIT:
