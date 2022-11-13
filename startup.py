@@ -14,7 +14,7 @@ class Title_Screen:
     start_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
     hovered_start_title = pygame.transform.scale(start_title, (start_title.get_width()*1.2, start_title.get_height()*1.2))
     
-    hover = False
+    collide = False
     text_rect = duck_title.get_rect()
     text_rect.center = center_position
     
@@ -23,14 +23,14 @@ class Title_Screen:
     
     def mouse_over(self, mouse):
         if self.text_rect.collidepoint(mouse):
-            self.hover = True
+            self.collide = True
         else:
-            self.hover = False
+            self.collide = False
     
     def display_duck_title(self, screen, mouse):
         self.mouse_over(mouse)
     
-        if self.hover:
+        if self.collide:
             screen.blit(self.hovered_duck_title, self.text_rect)
             pygame.display.update()
         else:
