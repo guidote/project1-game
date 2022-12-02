@@ -27,9 +27,8 @@ class Menu_Button:
         
         if self.collide:
             screen.blit(self.hover_button_image()[0], self.hover_button_image()[1])
-            pygame.display.update()
         else:
             screen.blit(self.image, self.rect)
-            pygame.display.update()
+        pygame.display.update()
     
         
