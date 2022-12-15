@@ -21,13 +21,17 @@ class Duck:
         pass
      
     def display_duck(self, mouse, screen, movement):
-        indices = [0,1]
-        for i in indices:
-            img = pygame.image.load("data/gfx/waddle_{0}_{1}.png".format(movement, i))
-            duck = pygame.transform.scale(img, (self.width, self.height))
-            screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
+        if movement =='shop':
             pygame.display.update()
             pygame.time.delay(100)
+        else:
+            indices = [0,1]
+            for i in indices:
+                img = pygame.image.load("data/gfx/waddle_{0}_{1}.png".format(movement, i))
+                duck = pygame.transform.scale(img, (self.width, self.height))
+                screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
+                pygame.display.update()
+                pygame.time.delay(100)
     
     def check_pick_up(self, b_x, b_y, b_width, b_height):
         top = self.position.y + self.height/4

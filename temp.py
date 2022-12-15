@@ -3,6 +3,7 @@ from pygame.locals import *
 from groundObject import GroundObject
 from duck import Duck
 from startup import Menu_Button
+from shop import Shop
 
 # Pygame Window
 WIDTH, HEIGHT = 700, 600
@@ -41,12 +42,13 @@ def main_menu():
                 
 def play():
     pygame.display.set_caption("Duck Game")
-    
+    shop_height = 150
     #Create a duck
     duck = Duck()
-    
-    # Getting Images for the shop
-    # shop = pygame.image.load('data/gfx/shop.png')
+
+    #Create Shop
+    shop_button = Shop('data/gfx/shop/shop_rectangle.png', (0, shop_height))
+    #shop = pygame.image.load('data/gfx/shop/shop_rectangle.png')
     # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
     # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
     # worms_button = pygame.image.load('data/gfx/worms_button.png')
@@ -67,26 +69,27 @@ def play():
     # TODO: make a check to not generate two items on the same spot OR IN THE SHOP
     for i in ground_objects:
             randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
-            randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height())
+            randomy = random.randrange(SCREEN.get_height() - (i.sprite.get_height() + shop_height))
             i.position.xy = randomx, randomy
 
     while True:
         
         SCREEN.fill(GRASS_GREEN)
         # Display Shop and score section
-        # DISPLAY.blit(shop, (0, 0))
+        #SCREEN.blit(shop, (0, 450))
+        #shop_button.display_shop(SCREEN)
 
         # for button in buttons:
-        #     DISPLAY.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
+        #     SCREEN.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
         #     priceDisplay = font_small.render(str(button.price), True, (0,0,0))
             
         #     # For later development : LEVELS
         #     #levelDisplay = font_20.render('Lvl. ' + str(button.level), True, (200,200,200))
-        #     #DISPLAY.blit(levelDisplay, (234 + (buttons.index(button)*125), 441))
+        #     #SCREEN.blit(levelDisplay, (234 + (buttons.index(button)*125), 441))
             
         #     counter = font_small.render(str(button.count).zfill(7), True, (0,0,0))
         #    #Below is 2 coordinates that have to depend on the button's position
-        #     #DISPLAY.blit(counter, (72, 394))
+        #     #SCREEEN.blit(counter, (72, 394))
 
         
         #Display GroundObjects
@@ -105,10 +108,18 @@ def play():
             # Mouse Moving Event = Move Duck
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
-                duck.position.x, duck.position.y = mouse 
+                
+                if (mouse[1] < (SCREEN.get_height() - shop_height)):
+                    # In Game Screen
+                    duck.position.x, duck.position.y = mouse 
+                    movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
+                    duck.display_duck(mouse, SCREEN, movement)
+                else:
+                    # In Shop Area
+                    duck.position.x, duck.position.y = mouse 
+                    print("in shop")
+                    duck.display_duck(mouse, SCREEN, "shop")
 
-                movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
-                duck.display_duck(mouse, SCREEN, movement)
                 pygame.display.update()
                 
 
@@ -119,7 +130,7 @@ def play():
                     #groud_objects[i].count +=1
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
-                    randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height())
+                    randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
                     i.position.xy = randomx, randomy
         
             #To Quit
