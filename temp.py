@@ -47,7 +47,7 @@ def play():
     duck = Duck()
 
     #Create Shop
-    shop_button = Shop('data/gfx/shop/shop_rectangle.png', (0, shop_height))
+    shop_button = Shop('data/gfx/shop/shop_rectangle.png', (0, HEIGHT - shop_height))
     #shop = pygame.image.load('data/gfx/shop/shop_rectangle.png')
     # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
     # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
@@ -57,6 +57,9 @@ def play():
     # buttons.append(Button(weeds_button))
     # buttons.append(Button(flowers_button))
     # buttons.append(Button(worms_button))
+    
+    # Creating Score counter
+    score = [0,10,0,0]
 
     #Setting up weeds, flowers and worms
     ground_objects = []
@@ -117,7 +120,7 @@ def play():
                 else:
                     # In Shop Area
                     duck.position.x, duck.position.y = mouse 
-                    print("in shop")
+
                     duck.display_duck(mouse, SCREEN, "shop")
 
                 pygame.display.update()
@@ -127,7 +130,17 @@ def play():
             for i in ground_objects:
                 if (duck.check_pick_up(i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
                     # Counters
-                    #groud_objects[i].count +=1
+                    if i.type =='weed':
+                        score[0] = score[0] + 1
+                    elif i.type =='flower':
+                        score[1] = score[1] -1 
+                    elif i.type =='worm':
+                        score[1] = score[1] + 1 
+                    print("Weeds score:", score[0])
+                    print("flower score:", score[1])
+                    print("worm score:", score[2])
+                    print("Total score:", score[3])
+                    score[3] = score[0]+score[1]+score[2]
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
                     randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
