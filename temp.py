@@ -74,8 +74,9 @@ def play():
             randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
             randomy = random.randrange(SCREEN.get_height() - (i.sprite.get_height() + shop_height))
             i.position.xy = randomx, randomy
-
-    while True:
+    playing = True
+    
+    while playing:
         
         SCREEN.fill(GRASS_GREEN)
         # Display Shop and score section
@@ -147,9 +148,17 @@ def play():
                     i.position.xy = randomx, randomy
         
             #To Quit
-            if event.type == QUIT:
+            
+            if event.type == pygame.QUIT:
+                playing = False
                 pygame.quit()
                 sys.exit()
+                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    playing = False
+                    pygame.quit()
+                    sys.exit()
                 
             pygame.display.update()
     
