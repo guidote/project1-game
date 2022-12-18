@@ -14,10 +14,10 @@ def main_menu():
     pygame.display.set_caption("Duck Menu")
     
     img = pygame.image.load("data/gfx/main_menu/duck_title.png")
-    duck_title = pygame.transform.scale(img, (img.get_width()/1.5, img.get_height()/1.5))
+    duck_title = pygame.transform.scale(img, (img.get_width()*10, img.get_height()*10))
     
     img = pygame.image.load("data/gfx/main_menu/start_title.png")
-    start_title = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
+    start_title = pygame.transform.scale(img, (img.get_width()*7, img.get_height()*7))
     
     # Create title screen 
     duck_button = Menu_Button(duck_title, (350, 300))
