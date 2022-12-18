@@ -29,6 +29,5 @@ class Menu_Button:
             screen.blit(self.hover_button_image()[0], self.hover_button_image()[1])
         else:
             screen.blit(self.image, self.rect)
-        pygame.display.update()
     
         

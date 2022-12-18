@@ -37,6 +37,8 @@ def main_menu():
         start_button.display_button_image(SCREEN, mouse)
         quit_button.display_button_image(SCREEN, mouse)
         
+        pygame.display.update()
+        
         for event in pygame.event.get():
             # Mouse click start playing
             if event.type == pygame.MOUSEBUTTONDOWN:
