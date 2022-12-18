@@ -30,8 +30,8 @@ class Shop:
     #     self.hovered_rect = self.hovered_img.get_rect(center=(self.x_pos, self.y_pos))
     #     return [self.hovered_img, self.hovered_rect]
         
-    # def display_shop(self, screen):
-    #     screen.blit(self.image, self.rect)
-    #     pygame.display.update()
+    def display_shop(self, screen):
+        screen.blit(self.image, self.rect)
+        pygame.display.update()
     
         

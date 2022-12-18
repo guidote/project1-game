@@ -47,7 +47,7 @@ def play():
     duck = Duck()
 
     #Create Shop
-    shop_button = Shop('data/gfx/shop/shop_rectangle.png', (0, HEIGHT - shop_height))
+    shop = Shop('data/gfx/shop/thumbnail_Shop.png', (0, HEIGHT - shop_height))
     #shop = pygame.image.load('data/gfx/shop/shop_rectangle.png')
     # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
     # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
@@ -81,7 +81,8 @@ def play():
         SCREEN.fill(GRASS_GREEN)
         # Display Shop and score section
         #SCREEN.blit(shop, (0, 450))
-        #shop_button.display_shop(SCREEN)
+        #shop.display_shop(SCREEN)
+        SCREEN.blit(shop.image,(0, 450))
 
         # for button in buttons:
         #     SCREEN.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
@@ -113,7 +114,7 @@ def play():
             if event.type == pygame.MOUSEMOTION:
                 mouse = pygame.mouse.get_pos()
                 
-                if (mouse[1] < (SCREEN.get_height() - shop_height)):
+                if (mouse[1] < (SCREEN.get_height() - shop_height - duck.height/6)):
                     # In Game Screen
                     duck.position.x, duck.position.y = mouse 
                     movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
@@ -137,10 +138,6 @@ def play():
                         score[1] = score[1] -1 
                     elif i.type =='worm':
                         score[1] = score[1] + 1 
-                    print("Weeds score:", score[0])
-                    print("flower score:", score[1])
-                    print("worm score:", score[2])
-                    print("Total score:", score[3])
                     score[3] = score[0]+score[1]+score[2]
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
