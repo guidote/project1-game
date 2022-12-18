@@ -17,26 +17,38 @@ def main_menu():
     duck_title = pygame.transform.scale(img, (img.get_width()*10, img.get_height()*10))
     
     img = pygame.image.load("data/gfx/main_menu/start_title.png")
-    start_title = pygame.transform.scale(img, (img.get_width()*7, img.get_height()*7))
+    start_title = pygame.transform.scale(img, (img.get_width()*5, img.get_height()*5))
+    
+    img = pygame.image.load("data/gfx/main_menu/quit_title.png")
+    quit_title = pygame.transform.scale(img, (img.get_width()*5, img.get_height()*5))
     
     # Create title screen 
-    duck_button = Menu_Button(duck_title, (350, 300))
-    start_button = Menu_Button(start_title, (350, 450))
+    duck_button = Menu_Button(duck_title, (350, 250))
+    start_button = Menu_Button(start_title, (350, 400))
+    quit_button = Menu_Button(quit_title, (350, 500))
     
-    while True:
+    on = True
+    
+    while on:
         SCREEN.fill(GRASS_GREEN)
         mouse = pygame.mouse.get_pos()
         
         duck_button.display_button_image(SCREEN, mouse)
         start_button.display_button_image(SCREEN, mouse)
+        quit_button.display_button_image(SCREEN, mouse)
         
         for event in pygame.event.get():
             # Mouse click start playing
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button.collide:
                     play()
-                
-            if event.type == QUIT:
+                if quit_button.collide:
+                    on = False
+                    pygame.quit()
+                    sys.exit()
+                    
+            if event.type == pygame.QUIT:
+                on = False
                 pygame.quit()
                 sys.exit()
                 
