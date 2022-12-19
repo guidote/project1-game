@@ -2,6 +2,8 @@ import pygame
 import time
 from enum import Enum
 
+#TODO : fix duck
+
 class Duck:
     position = pygame.Vector2()
     position.xy
@@ -28,6 +30,7 @@ class Duck:
             indices = [0,1]
             for i in indices:
                 img = pygame.image.load("data/gfx/waddle_{0}_{1}.png".format(movement, i))
+                img = pygame.Surface.convert_alpha(img)
                 duck = pygame.transform.scale(img, (self.width, self.height))
                 screen.blit(duck, (mouse[0] - (duck.get_width()/2) ,mouse[1] - (duck.get_height()/2)))
                 pygame.display.update()
