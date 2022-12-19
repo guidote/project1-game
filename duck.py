@@ -6,8 +6,8 @@ class Duck:
     position = pygame.Vector2()
     position.xy
     default_duck_img = pygame.image.load("data/gfx/waddle_front_0.png")
-    width = default_duck_img.get_width()/7
-    height = default_duck_img.get_height()/7
+    width = default_duck_img.get_width()*5
+    height = default_duck_img.get_height()*5
     
     '''
     duck_right_imgs = ["waddle_right_0.png","waddle_right_1.png"]
