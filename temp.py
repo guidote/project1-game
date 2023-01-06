@@ -10,6 +10,10 @@ pygame.init()
 WIDTH, HEIGHT = 700, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 GRASS_GREEN = (145, 211, 109)
+FALL_ORANGE = (177,97,0)
+WINTER_WHITE = (252,252,252)
+SPRING_GREEN = (112,220,112)
+
 FONT_SCORE = pygame.font.Font('data/font/BUBBLEBO.ttf', 32)
 
 def main_menu():
@@ -69,11 +73,8 @@ def play():
     # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
     # worms_button = pygame.image.load('data/gfx/worms_button.png')
     
-    # buttons = []
-    # buttons.append(Button(weeds_button))
-    # buttons.append(Button(flowers_button))
-    # buttons.append(Button(worms_button))
-    
+    # Levels
+    level = 1
     # Creating Score counter
     score = [0,10,0,0]
 
@@ -93,38 +94,41 @@ def play():
     playing = True
     
     while playing:
-        
-        SCREEN.fill(GRASS_GREEN)
+        season = ''
+        if level == 1:
+            SCREEN.fill(GRASS_GREEN)
+            season = 'Summer'
+        elif level ==2:
+            SCREEN.fill(FALL_ORANGE)
+            season = 'Fall'
+        elif level ==3:
+            SCREEN.fill(WINTER_WHITE)
+            season = 'Winter'
+        elif level ==4:
+            SCREEN.fill(SPRING_GREEN)
+            season = 'Spring'
+            
         # Display Shop
         SCREEN.blit(shop.image,(0, 450))
+        #Display Season name
+        season_name = FONT_SCORE.render(season,True, 'black')
+        SCREEN.blit(season_name, ((50),(HEIGHT - shop_height + 30)))
         # Display Score
-        
         score_weed = FONT_SCORE.render(str(score[0]), True, 'black')
-        SCREEN.blit(score_weed, ((100 + 32),(HEIGHT - shop_height + 30)))
-          
+        SCREEN.blit(score_weed, ((100 + 100),(HEIGHT - shop_height + 30)))
         if score[1]<0:
             score_flower = FONT_SCORE.render(str(score[1]), True, 'red')
         else:
             score_flower = FONT_SCORE.render(str(score[1]), True, 'black')
-        SCREEN.blit(score_flower, ((100 + 64),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_flower, ((100 + 150),(HEIGHT - shop_height + 30)))
         
         score_worm = FONT_SCORE.render(str(score[2]), True, 'black')
-        SCREEN.blit(score_worm, ((100 + 96),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_worm, ((100 + 200),(HEIGHT - shop_height + 30)))
         
         score_total = FONT_SCORE.render(str(score[3]), True, 'black')
-        SCREEN.blit(score_total, ((100 + 128),(HEIGHT - shop_height + 30)))
-        # for button in buttons:
-        #     SCREEN.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
-        #     priceDisplay = font_small.render(str(button.price), True, (0,0,0))
+        SCREEN.blit(score_total, ((100 + 250),(HEIGHT - shop_height + 30)))
             
-        #     # For later development : LEVELS
-        #     #levelDisplay = font_20.render('Lvl. ' + str(button.level), True, (200,200,200))
-        #     #SCREEN.blit(levelDisplay, (234 + (buttons.index(button)*125), 441))
-            
-        #     counter = font_small.render(str(button.count).zfill(7), True, (0,0,0))
-        #    #Below is 2 coordinates that have to depend on the button's position
-        #     #SCREEEN.blit(counter, (72, 394))
-
+        # LATER DEVELOPMENT: LEVELS OR SEASONS
         
         #Display GroundObjects
         for i in ground_objects:
@@ -166,13 +170,22 @@ def play():
                     elif i.type =='flower':
                         score[1] = score[1] -1 
                     elif i.type =='worm':
-                        score[1] = score[1] + 1 
+                        score[2] = score[2] + 1 
                     score[3] = score[0]+score[1]+score[2]
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
                     randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
                     i.position.xy = randomx, randomy
-
+            
+            #Changing seasons/levels
+            if score[3]%100 > 75 and level == 3:
+                level = 4
+            elif score[3]%100 > 50 and level == 2:
+                level = 3
+            elif score[3]%100 > 25 and level == 1:
+                level = 2
+            elif score[3]%100 <= 25:
+                level = 1
         
             #To Quit
             
