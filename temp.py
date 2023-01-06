@@ -4,17 +4,20 @@ from groundObject import GroundObject
 from duck import Duck
 from startup import Menu_Button
 from shop import Shop
+from level import Level
 
 # Pygame Window
 pygame.init()
 WIDTH, HEIGHT = 700, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-GRASS_GREEN = (145, 211, 109)
-FALL_ORANGE = (177,97,0)
-WINTER_WHITE = (252,252,252)
-SPRING_GREEN = (112,220,112)
-
+# GRASS_GREEN = (145, 211, 109)
+# FALL_ORANGE = (177,97,0)
+# WINTER_WHITE = (252,252,252)
+# SPRING_GREEN = (112,220,112)
 FONT_SCORE = pygame.font.Font('data/font/Bubblegum.ttf', 32)
+LEVEL = Level(1)
+
+
 
 def main_menu():
     pygame.display.set_caption("Duck Menu")
@@ -36,7 +39,7 @@ def main_menu():
     on = True
     
     while on:
-        SCREEN.fill(GRASS_GREEN)
+        SCREEN.fill(LEVEL.color)
         mouse = pygame.mouse.get_pos()
         
         duck_button.display_button_image(SCREEN, mouse)
@@ -68,13 +71,7 @@ def play():
 
     #Create Shop
     shop = Shop('data/gfx/shop/thumbnail_Shop.png', (0, HEIGHT - shop_height))
-    #shop = pygame.image.load('data/gfx/shop/shop_rectangle.png')
-    # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
-    # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
-    # worms_button = pygame.image.load('data/gfx/worms_button.png')
     
-    # Levels
-    level = 1
     # Creating Score counter
     score = [0,10,0,0]
 
@@ -94,24 +91,14 @@ def play():
     playing = True
     
     while playing:
-        season = ''
-        if level == 1:
-            SCREEN.fill(GRASS_GREEN)
-            season = 'Summer'
-        elif level ==2:
-            SCREEN.fill(FALL_ORANGE)
-            season = 'Fall'
-        elif level ==3:
-            SCREEN.fill(WINTER_WHITE)
-            season = 'Winter'
-        elif level ==4:
-            SCREEN.fill(SPRING_GREEN)
-            season = 'Spring'
+        #Changing seasons/levels
+        LEVEL.change_seasons(score[3])
+        SCREEN.fill(LEVEL.color)
             
         # Display Shop
         SCREEN.blit(shop.image,(0, 450))
         #Display Season name
-        season_name = FONT_SCORE.render(season,True, 'black')
+        season_name = FONT_SCORE.render(LEVEL.season,True, 'black')
         SCREEN.blit(season_name, ((50),(HEIGHT - shop_height + 30)))
         # Display Score
         score_weed = FONT_SCORE.render(str(score[0]), True, 'black')
@@ -167,26 +154,20 @@ def play():
                     # Counters
                     if i.type =='weed':
                         score[0] = score[0] + 1
+                        # i.sound.play()
                     elif i.type =='flower':
                         score[1] = score[1] -1 
+                        # i.sound.play()
                     elif i.type =='worm':
                         score[2] = score[2] + 1 
+                        # i.sound.play()
                     score[3] = score[0]+score[1]+score[2]
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
                     randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
                     i.position.xy = randomx, randomy
-            
-            #Changing seasons/levels
-            if score[3]%100 > 75 and level == 3:
-                level = 4
-            elif score[3]%100 > 50 and level == 2:
-                level = 3
-            elif score[3]%100 > 25 and level == 1:
-                level = 2
-            elif score[3]%100 <= 25:
-                level = 1
         
+
             #To Quit
             
             if event.type == pygame.QUIT:

@@ -5,15 +5,20 @@ Class for objects appearing on screen
 Weeds, Flowers and Worms
 """
 import pygame
+from pygame import mixer 
 
 class GroundObject:
     def __init__(self, type):
         self.type = type
         if (type == 'weed'):
            self.sprite = pygame.image.load('weedgreen.png')
+           # self.sound = mixer.Sound('filename')
         elif (type == 'flower'):
             self.sprite = pygame.image.load('flowerpink.jpg')
+            # self.sound = mixer.Sound('filename')
         else:
             self.sprite = pygame.image.load('wormbrown.png')
+            # self.sound = mixer.Sound('filename')
+            
         self.position = pygame.Vector2()
         self.position.xy
