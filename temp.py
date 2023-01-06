@@ -103,21 +103,21 @@ def play():
         SCREEN.blit(shop.image,(0, 450))
         #Display Season name
         season_name = FONT_SCORE.render(LEVEL.season,True, 'black')
-        SCREEN.blit(season_name, ((50),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(season_name, (75,(HEIGHT - shop_height + 32)))
         # Display Score
         score_weed = FONT_SCORE.render(str(score[0]), True, 'black')
-        SCREEN.blit(score_weed, ((100 + 100),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_weed, (337,(HEIGHT - shop_height + 80)))
         if score[1]<0:
             score_flower = FONT_SCORE.render(str(score[1]), True, 'red')
         else:
             score_flower = FONT_SCORE.render(str(score[1]), True, 'black')
-        SCREEN.blit(score_flower, ((100 + 150),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_flower, (470,(HEIGHT - shop_height + 80)))
         
         score_worm = FONT_SCORE.render(str(score[2]), True, 'black')
-        SCREEN.blit(score_worm, ((100 + 200),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_worm, (610,(HEIGHT - shop_height + 80)))
         
         score_total = FONT_SCORE.render(str(score[3]), True, 'black')
-        SCREEN.blit(score_total, ((100 + 250),(HEIGHT - shop_height + 30)))
+        SCREEN.blit(score_total, (125,(HEIGHT - shop_height + 87)))
             
         # LATER DEVELOPMENT: LEVELS OR SEASONS
         
