@@ -12,13 +12,13 @@ class GroundObject:
         self.type = type
         if (type == 'weed'):
            self.sprite = pygame.image.load('weedgreen.png')
-           # self.sound = mixer.Sound('filename')
+           self.sound = mixer.Sound('data/sfx/weed.wav')
         elif (type == 'flower'):
             self.sprite = pygame.image.load('flowerpink.jpg')
-            # self.sound = mixer.Sound('filename')
+            self.sound = mixer.Sound('data/sfx/flower.wav')
         else:
             self.sprite = pygame.image.load('wormbrown.png')
-            # self.sound = mixer.Sound('filename')
+            self.sound = mixer.Sound('data/sfx/crunch.wav')
             
         self.position = pygame.Vector2()
         self.position.xy

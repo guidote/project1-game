@@ -90,11 +90,15 @@ def play():
             i.position.xy = randomx, randomy
     playing = True
     
+    # Background Music
+    pygame.mixer.music.load(LEVEL.music)
+    pygame.mixer.music.play()
+    
     while playing:
         #Changing seasons/levels
         LEVEL.change_seasons(score[3])
         SCREEN.fill(LEVEL.color)
-            
+        
         # Display Shop
         SCREEN.blit(shop.image,(0, 450))
         #Display Season name
@@ -154,13 +158,13 @@ def play():
                     # Counters
                     if i.type =='weed':
                         score[0] = score[0] + 1
-                        # i.sound.play()
+                        i.sound.play()
                     elif i.type =='flower':
                         score[1] = score[1] -1 
-                        # i.sound.play()
+                        i.sound.play()
                     elif i.type =='worm':
                         score[2] = score[2] + 1 
-                        # i.sound.play()
+                        i.sound.play()
                     score[3] = score[0]+score[1]+score[2]
                     # Generating a new position
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
