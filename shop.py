@@ -12,7 +12,6 @@ def duck_over_rect(rect, mouse):
 class Shop:
     collide = False
     
-    
     # weeds_button = pygame.image.load('data/gfx/weeds_button.png')
     # flowers_button = pygame.image.load('data/gfx/flowers_button.png')
     # worms_button = pygame.image.load('data/gfx/worms_button.png')

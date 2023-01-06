@@ -6,9 +6,11 @@ from startup import Menu_Button
 from shop import Shop
 
 # Pygame Window
+pygame.init()
 WIDTH, HEIGHT = 700, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 GRASS_GREEN = (145, 211, 109)
+FONT_SCORE = pygame.font.Font('data/font/BUBBLEBO.ttf', 32)
 
 def main_menu():
     pygame.display.set_caption("Duck Menu")
@@ -93,11 +95,24 @@ def play():
     while playing:
         
         SCREEN.fill(GRASS_GREEN)
-        # Display Shop and score section
-        #SCREEN.blit(shop, (0, 450))
-        #shop.display_shop(SCREEN)
+        # Display Shop
         SCREEN.blit(shop.image,(0, 450))
-
+        # Display Score
+        
+        score_weed = FONT_SCORE.render(str(score[0]), True, 'black')
+        SCREEN.blit(score_weed, ((100 + 32),(HEIGHT - shop_height + 30)))
+          
+        if score[1]<0:
+            score_flower = FONT_SCORE.render(str(score[1]), True, 'red')
+        else:
+            score_flower = FONT_SCORE.render(str(score[1]), True, 'black')
+        SCREEN.blit(score_flower, ((100 + 64),(HEIGHT - shop_height + 30)))
+        
+        score_worm = FONT_SCORE.render(str(score[2]), True, 'black')
+        SCREEN.blit(score_worm, ((100 + 96),(HEIGHT - shop_height + 30)))
+        
+        score_total = FONT_SCORE.render(str(score[3]), True, 'black')
+        SCREEN.blit(score_total, ((100 + 128),(HEIGHT - shop_height + 30)))
         # for button in buttons:
         #     SCREEN.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
         #     priceDisplay = font_small.render(str(button.price), True, (0,0,0))
@@ -157,6 +172,7 @@ def play():
                     randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
                     randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
                     i.position.xy = randomx, randomy
+
         
             #To Quit
             
