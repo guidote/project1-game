@@ -14,7 +14,7 @@ FALL_ORANGE = (177,97,0)
 WINTER_WHITE = (252,252,252)
 SPRING_GREEN = (112,220,112)
 
-FONT_SCORE = pygame.font.Font('data/font/BUBBLEBO.ttf', 32)
+FONT_SCORE = pygame.font.Font('data/font/Bubblegum.ttf', 32)
 
 def main_menu():
     pygame.display.set_caption("Duck Menu")
