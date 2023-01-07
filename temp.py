@@ -142,8 +142,11 @@ def play():
                     # In Game Screen
                     duck.position.x, duck.position.y = mouse 
                     movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
-                    duck.display_duck(mouse, SCREEN, movement)
-                    duck.update(movement)
+                    if movement == duck.images_idle:
+                        pass
+                    else:
+                        duck.display_duck(mouse, SCREEN, movement)
+                        duck.update(movement)
                 else:
                     # In Shop Area
                     duck.position.x, duck.position.y = mouse 

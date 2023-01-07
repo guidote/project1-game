@@ -7,7 +7,7 @@ from enum import Enum
 class Duck:
     position = pygame.Vector2()
     position.xy
-    default_duck_img = pygame.image.load("data/gfx/waddle_front_0.png")
+    default_duck_img = pygame.image.load("data/gfx/duck_waddle_front_0.png")
     width = default_duck_img.get_width()*5
     height = default_duck_img.get_height()*5
 
@@ -19,17 +19,29 @@ class Duck:
         self.images_back = []
         self.images_idle = []
         
-        self.images_right.append(pygame.image.load('data/gfx/waddle_right_0.png'))
-        self.images_right.append(pygame.image.load('data/gfx/waddle_right_1.png'))
+        self.images_right.append(pygame.image.load('data/gfx/duck_waddle_right_0.png'))
+        self.images_right.append(pygame.image.load('data/gfx/duck_waddle_right_1.png'))
+        self.images_right.append(pygame.image.load('data/gfx/duck_waddle_right_2.png'))
+        self.images_right.append(pygame.image.load('data/gfx/duck_waddle_right_3.png'))
+        self.images_right.append(pygame.image.load('data/gfx/duck_waddle_right_4.png'))
         
-        self.images_left.append(pygame.image.load('data/gfx/waddle_left_0.png'))
-        self.images_left.append(pygame.image.load('data/gfx/waddle_left_1.png'))
+        self.images_left.append(pygame.image.load('data/gfx/duck_waddle_left_0.png'))
+        self.images_left.append(pygame.image.load('data/gfx/duck_waddle_left_1.png'))
+        self.images_left.append(pygame.image.load('data/gfx/duck_waddle_left_2.png'))
+        self.images_left.append(pygame.image.load('data/gfx/duck_waddle_left_3.png'))
+        self.images_left.append(pygame.image.load('data/gfx/duck_waddle_left_4.png'))
         
-        self.images_front.append(pygame.image.load('data/gfx/waddle_front_0.png'))
-        self.images_front.append(pygame.image.load('data/gfx/waddle_front_1.png'))
+        self.images_front.append(pygame.image.load('data/gfx/duck_waddle_front_0.png'))
+        self.images_front.append(pygame.image.load('data/gfx/duck_waddle_front_1.png'))
+        self.images_front.append(pygame.image.load('data/gfx/duck_waddle_front_2.png'))
+        self.images_front.append(pygame.image.load('data/gfx/duck_waddle_front_3.png'))
+        self.images_front.append(pygame.image.load('data/gfx/duck_waddle_front_4.png'))
         
-        self.images_back.append(pygame.image.load('data/gfx/waddle_back_0.png'))
-        self.images_back.append(pygame.image.load('data/gfx/waddle_back_1.png'))
+        self.images_back.append(pygame.image.load('data/gfx/duck_waddle_back_0.png'))
+        self.images_back.append(pygame.image.load('data/gfx/duck_waddle_back_1.png'))
+        self.images_back.append(pygame.image.load('data/gfx/duck_waddle_back_2.png'))
+        self.images_back.append(pygame.image.load('data/gfx/duck_waddle_back_3.png'))
+        self.images_back.append(pygame.image.load('data/gfx/duck_waddle_back_4.png'))
         
         self.images_idle.append(pygame.image.load('data/gfx/waddle_idle_0.png'))
         self.images_idle.append(pygame.image.load('data/gfx/waddle_idle_1.png'))
