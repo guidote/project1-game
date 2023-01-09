@@ -10,7 +10,6 @@ from pygame import mixer
 
 class Level:
     def __init__(self, number):
-        self.type = type
         if (number == 1):
             self.color = (145, 211, 109)
             self.season = 'Summer'

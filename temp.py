@@ -98,6 +98,8 @@ def play():
         #Changing seasons/levels
         LEVEL.change_seasons(score[3])
         SCREEN.fill(LEVEL.color)
+        for i in ground_objects:
+                i.change_season(LEVEL.season)
         
         # Display Shop
         SCREEN.blit(shop.image,(0, 450))
