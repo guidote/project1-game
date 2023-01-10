@@ -30,9 +30,21 @@ class GroundObject:
     def change_season_flower (self,season):
         if season =='Summer':
             self.sprite = pygame.image.load('data/gfx/ground_objects/summer_flower.png')
+            self.width = self.sprite.get_width()*2
+            self.height = self.sprite.get_height()*2
+            self.sprite = pygame.transform.scale(self.sprite, (self.width, self.height))
         elif season =='Spring':
             self.sprite = pygame.image.load('data/gfx/ground_objects/spring_flower.png')
+            self.width = self.sprite.get_width()*2
+            self.height = self.sprite.get_height()*2
+            self.sprite = pygame.transform.scale(self.sprite, (self.width, self.height))
         elif season =='Fall':
              self.sprite = pygame.image.load('data/gfx/ground_objects/fall_flower.png')
+             self.width = self.sprite.get_width()*2
+             self.height = self.sprite.get_height()*2
+             self.sprite = pygame.transform.scale(self.sprite, (self.width, self.height))
         elif season =='Winter':
             self.sprite = pygame.image.load('data/gfx/ground_objects/winter_flower.png')
+            self.width = self.sprite.get_width()*2
+            self.height = self.sprite.get_height()*2
+            self.sprite = pygame.transform.scale(self.sprite, (self.width, self.height))
