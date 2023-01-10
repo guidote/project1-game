@@ -8,8 +8,14 @@ from level import Level
 
 # Pygame Window
 pygame.init()
-WIDTH, HEIGHT = 700, 600
+WIDTH = 700
+HEIGHT = 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
+
+CLOCK = pygame.time.Clock()
+
+game_sprites = pygame.sprite.Group()
+
 # GRASS_GREEN = (145, 211, 109)
 # FALL_ORANGE = (177,97,0)
 # WINTER_WHITE = (252,252,252)
@@ -66,8 +72,9 @@ def main_menu():
 def play():
     pygame.display.set_caption("Duck Game")
     shop_height = 150
+    
     #Create a duck
-    duck = Duck()
+    duck = Duck((450,300), game_sprites)
 
     #Create Shop
     shop = Shop('data/gfx/shop/thumbnail_Shop.png', (0, HEIGHT - shop_height))
@@ -126,66 +133,41 @@ def play():
         #Display GroundObjects
         for i in ground_objects:
             SCREEN.blit(i.sprite, i.position.xy)
-            
-            
-        # Duck Previous Position
-        mouse = pygame.mouse.get_pos()
-        previous_position_x = mouse[0]
-        previous_position_y = mouse[1]
         
         #Event Handler
         for event in pygame.event.get():
-            
-            # Mouse Moving Event = Move Duck
-            if event.type == pygame.MOUSEMOTION:
-                mouse = pygame.mouse.get_pos()
-                
-                if (mouse[1] < (SCREEN.get_height() - shop_height - duck.height/6)):
-                    # In Game Screen
-                    duck.position.x, duck.position.y = mouse 
-                    movement = duck.check_duck_position(previous_position_x, previous_position_y, mouse[0], mouse[1])
-                    duck.display_duck(mouse, SCREEN, movement)
-                    duck.update(movement)
-                else:
-                    # In Shop Area
-                    duck.position.x, duck.position.y = mouse 
-                    duck.display_duck(mouse, SCREEN, "shop")
-
-                pygame.display.update()
-                
-
-            #Check for Pick up and action of GroundObjects
-            for i in ground_objects:
-                if (duck.check_pick_up(i.position.x, i.position.y, i.sprite.get_width(), i.sprite.get_height())):
-                    # Counters
-                    if i.type =='weed':
-                        score[0] = score[0] + 1
-                        i.sound.play()
-                    elif i.type =='flower':
-                        score[1] = score[1] -1 
-                        i.sound.play()
-                    elif i.type =='worm':
-                        score[2] = score[2] + 1 
-                        i.sound.play()
-                    score[3] = score[0]+score[1]+score[2]
-                    # Generating a new position
-                    randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
-                    randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
-                    i.position.xy = randomx, randomy
-        
-
             #To Quit
-            
             if event.type == pygame.QUIT:
                 playing = False
                 pygame.quit()
                 sys.exit()
                 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    playing = False
-                    pygame.quit()
-                    sys.exit()
+
+        dt = CLOCK.tick() / 1000
+            
+        game_sprites.draw(SCREEN)
+        game_sprites.update(dt)
+           
+        pygame.display.update()
+                
+        #Check for Pick up and action of GroundObjects
+        for i in ground_objects:
+            if (duck.check_pick_up(i.position.x, i.position.y)):
+                # Counters
+                if i.type =='weed':
+                    score[0] = score[0] + 1
+                    i.sound.play()
+                elif i.type =='flower':
+                    score[1] = score[1] -1 
+                    i.sound.play()
+                elif i.type =='worm':
+                    score[2] = score[2] + 1 
+                    i.sound.play()
+                score[3] = score[0]+score[1]+score[2]
+                # Generating a new position
+                randomx = random.randrange(SCREEN.get_width() - i.sprite.get_width())
+                randomy = random.randrange(SCREEN.get_height() - i.sprite.get_height() - shop_height)
+                i.position.xy = randomx, randomy
                 
             pygame.display.update()
             
