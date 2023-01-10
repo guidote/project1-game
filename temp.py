@@ -141,6 +141,10 @@ def play():
                 playing = False
                 pygame.quit()
                 sys.exit()
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
                 
 
         dt = CLOCK.tick() / 1000
