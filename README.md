@@ -1,13 +1,15 @@
-# project1 : game
+# Duck
 
-Brainstorm :
+ADD IMAGE OF MENU
+ADD IMAGE OF PLAYING
+
+Python game created with Pygame library. 
+gfx by Gabrielle Guidote
+sfx from https://bigsoundbank.com/ 
+
 <br /> 
--Animation :
-  -walking up and down animation
-  -walking left right animation
-  -idle animation
+-Future Development Ideas : 
+- walking around a valley. 
+- Cat comes and attempts to swat the duck ! quack to make the cat go away or lose points by getting clawed by the cat.
+- Duck can overcome obstacles on map like : having to push logs to make a bridge
 <br /> 
--Game Idea : Duck picking flowers, weeds, worms, walking around a valley. Once weeds, worms, flowers get picked they dont get deleted but get randomly assigned a new location.
-Cat comes and attempts to swat the duck ! quack to make the cat go away or lose flower points by getting clawed by the cat.
-<br /> 
--Future Game Idea : Duck can overcome obstacles on map like : having to push logs to make a bridge
